@@ -66,14 +66,24 @@ if __name__ == "__main__":
         snr = SNR(fb,f_start_on,f_stop_on,f_start_off,f_stop_off)
         beams.append(Point(fb.header['src_raj'],fb.header['src_dej'],snr))
 
-    snrs = [point.snr for point in beams]
-    max_snr = max(snrs)
+    idx_snr_max = np.argmax([point.snr for point in beams])
+    idx_snr_min = np.argmin([point.snr for point in beams])	
+    
+    max_snr = beams[idx_snr_max].snr
     half_max_snr = 0.5 * max_snr
+    max_snr_fil = fil_list[idx_snr_max]
+    max_snr_ra = beams[idx_snr_max].ra 
+    max_snr_dec = beams[idx_snr_max].dec
 
-    max_snr_fil = fil_list[np.argmax(snrs)]
     min_snr_fil = fil_list[np.argmin(snrs)]
-    half_max_snr_fil = fil_list[np.argmin(np.abs(snrs - half_max_snr))]
-
+    min_snr_ra = beams[idx_snr_min].ra
+    min_snr_dec = beams[idx_snr_min].dec
+    
+    idx_snr_half = np.argmin(np.abs([point.snr for point in beams] - half_max_snr))
+    half_max_snr_fil = fil_list[idx_snr_half]
+    half_max_snr_ra = beams[idx_snr_half].ra
+    half_max_snr_dec = beams[idx_snr_half].dec
+    
     onspec_max = get_onspec(wt(max_snr_fil),f_start_on,f_stop_on,f_start_off,f_stop_off)
     onspec_min = get_onspec(wt(min_snr_fil),f_start_on,f_stop_on,f_start_off,f_stop_off)	
     onspec_hp  = get_onspec(wt(half_max_snr_fil),f_start_on,f_stop_on,f_start_off,f_stop_off)
@@ -105,7 +115,7 @@ if __name__ == "__main__":
     axs[1].plot(onspec_max)
     axs[1].plot(onspec_min)
     axs[1].plot(onspec_hp)
-    axs[1].set_xlabel('Frequency [MHz]')
+    axs[1].set_xlabel('Frequency [chans]')
     axs[1].set_ylabel('Power')
     
     plt.savefig('Grid_pattern_RA_DEC_Freq_Power.png')
