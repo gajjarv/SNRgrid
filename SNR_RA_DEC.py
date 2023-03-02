@@ -66,8 +66,8 @@ if __name__ == "__main__":
         snr = SNR(fb,f_start_on,f_stop_on,f_start_off,f_stop_off)
         beams.append(Point(fb.header['src_raj'],fb.header['src_dej'],snr))
 
-    max_snr = max([point.snr for point in beams])
-    min_snr = min([point.snr for point in beams])
+    snrs = [point.snr for point in beams]
+    max_snr = max(snrs)
     half_max_snr = 0.5 * max_snr
 
     max_snr_fil = fil_list[np.argmax(snrs)]
