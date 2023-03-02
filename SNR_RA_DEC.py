@@ -75,7 +75,7 @@ if __name__ == "__main__":
     half_max_snr_fil = fil_list[np.argmin(np.abs(snrs - half_max_snr))]
 
     onspec_max = get_onspec(wt(max_snr_fil),f_start_on,f_stop_on,f_start_off,f_stop_off)
-    onsepc_min = get_onspec(wt(min_snr_fil),f_start_on,f_stop_on,f_start_off,f_stop_off)	
+    onspec_min = get_onspec(wt(min_snr_fil),f_start_on,f_stop_on,f_start_off,f_stop_off)	
     onspec_hp  = get_onspec(wt(half_max_snr_fil),f_start_on,f_stop_on,f_start_off,f_stop_off)
 
     # Convert RA and DEC coordinates of the Point objects into arrays
