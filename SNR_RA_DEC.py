@@ -46,6 +46,7 @@ if __name__ == "__main__":
     parser.add_argument('--f_stop_on', type=float, default=6668.40, help='f_stop for on-line')
     parser.add_argument('--f_start_off', type=float, default=6668.65, help='f_start for off-line')
     parser.add_argument('--f_stop_off', type=float, default=6668.75, help='f_stop for off-line')
+
     args = parser.parse_args()
 
     #On Line
@@ -106,9 +107,9 @@ if __name__ == "__main__":
     # plot RA vs DEC contour
     contour_set = axs[0].contour(xi, yi, zi, levels=levels, cmap=cmap)
     axs[0].scatter(ra_hourangle, dec_deg)
-    axs[0].scatter(max_snr_ra,max_snr_dec,marker='*', s=100, color='r')
-    axs[0].scatter(min_snr_ra,min_snr_dec,marker='*', s=100, color='g')
-    axs[0].scatter(half_max_snr_ra,half_max_snr_dec,marker='*', s=100, color='b') 
+    axs[0].scatter(max_snr_ra,max_snr_dec,marker='*', s=100, color='r',label="Max")
+    axs[0].scatter(min_snr_ra,min_snr_dec,marker='*', s=100, color='g',label="Min")
+    axs[0].scatter(half_max_snr_ra,half_max_snr_dec,marker='*', s=100, color='b',label="Half Power")
     cbar = plt.colorbar(contour_set, ax=axs[0])
     cbar.ax.set_ylabel('SNR')
     axs[0].set_xlabel('RA [h]')
