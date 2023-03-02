@@ -75,7 +75,7 @@ if __name__ == "__main__":
     max_snr_ra = beams[idx_snr_max].ra 
     max_snr_dec = beams[idx_snr_max].dec
 
-    min_snr_fil = fil_list[np.argmin(snrs)]
+    min_snr_fil = fil_list[idx_snr_min]
     min_snr_ra = beams[idx_snr_min].ra
     min_snr_dec = beams[idx_snr_min].dec
     
@@ -106,15 +106,18 @@ if __name__ == "__main__":
     # plot RA vs DEC contour
     contour_set = axs[0].contour(xi, yi, zi, levels=levels, cmap=cmap)
     axs[0].scatter(ra_hourangle, dec_deg)
+    axs[0].scatter(max_snr_ra,max_snr_dec,marker='*', s=10, color='r')
+    axs[0].scatter(min_snr_ra,min_snr_dec,marker='*', s=10, color='g')
+    axs[0].scatter(half_max_snr_ra,half_max_snr_dec,marker='*', s=10, color='b') 
     cbar = plt.colorbar(contour_set, ax=axs[0])
     cbar.ax.set_ylabel('SNR')
     axs[0].set_xlabel('RA [h]')
     axs[0].set_ylabel('DEC [deg]')
     
     # plot Frequency vs Power
-    axs[1].plot(onspec_max)
-    axs[1].plot(onspec_min)
-    axs[1].plot(onspec_hp)
+    axs[1].plot(onspec_max,color='r')
+    axs[1].plot(onspec_min,color='g')
+    axs[1].plot(onspec_hp,color='b')
     axs[1].set_xlabel('Frequency [chans]')
     axs[1].set_ylabel('Power')
     
