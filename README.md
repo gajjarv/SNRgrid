@@ -20,3 +20,4 @@ Optional arguments:
 
 The code generates a plot of SNR as a function of RA and DEC. The plot can be saved as a .png file for later reference.
 
+![alt text](https://github.com/gajjarv/SNRgrid/blob/main/Grid_pattern_RA_DEC_Freq_Power.png)
